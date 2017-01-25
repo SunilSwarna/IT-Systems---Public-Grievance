@@ -1,0 +1,16 @@
+body
+{
+
+background-color: #ccffff;
+    background-repeat: no-repeat;
+}
+
+.navbar
+{
+    border-radius: 0;
+}
+.navbar-brand
+{
+    font-family: 'Satisfy', cursive;
+}
+

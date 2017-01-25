@@ -1,0 +1,45 @@
+
+<!-- load the path to our static files -->
+{% extends 'music/base.html' %}
+{% block title %} ALbum Details {% endblock %}
+{% block body %}
+    <center><strong><h2>Problems by others </h2></strong></center>
+
+<div class="albums-container container-fluid">
+
+    <!-- Albums -->
+    <div class="row">
+        {% if all_albums %}
+
+            {% for album in all_albums %}
+               {% if k != album.idp %}
+
+        <div class="col-sm-4 col-lg-2">
+                    <div class="thumbnail">
+                        <a href="#">
+                            <img src="{{ album.logo.url }}" class="img-responsive">
+                        </a>
+                        <div class="caption">
+                            <h2>{{ album.title }}</h2>
+                          <!--  <h4>{{ album.created_date}}</h4>
+                              -->
+                            <!-- View Details -->
+                            <a href="{% url 'music:detail' album.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+ {% endif %}            {% endfor %}
+        {% else %}
+            <div class="col-sm-12">
+                <br>
+                <a href="#">
+                    <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus"></span>&nbsp; No Photos Currently
+                    </button>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+
+<!-- load the path to our static files -->
+{% extends 'music/base.html' %}
+{% block title %} ALbum Details {% endblock %}
+{% block body %}
+{% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
+{% endif %}
+<ul><h3> Here Are all the Albums</h3>
+    {% for album in all_albums %}
+       <img src="{{album.logo.url}}" style="width: 250px;">
+    <br>
+        <a href="#">{{album.title}}</a>
+  <!--  <form action="{% url 'music:album-delete' album.id %}" method="post" style="display: inline;">
+        {% csrf_token %}
+ <input type="hidden" name="album_id" value="{{album.id}}"/>
+        <button type="submit" class="btn btn-default" btn-sm>
+            <span class="glyphicon glyphicon-trash">
+
+            </span>
+        </button>
+    </form>-->
+    {% endfor %}
+</ul>
+
+{% endblock %}
