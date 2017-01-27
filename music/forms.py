@@ -1,12 +1,15 @@
 from django.contrib.auth.models import User
 from django import forms
-from .models import Transport
+from .models import Transport,Profile
 class UserForm(forms.ModelForm):
     password=forms.CharField(widget=forms.PasswordInput)
     class Meta:
 
-        model= User
+        model=User
         fields=['username','email','password']
+        labels={'email':'Email-Id',
+                'username':'USERNAME',
+                }
 
 class UserLoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))

@@ -31,7 +31,7 @@ url(r'^register/$',views.UserFormView.as_view(),name='register'),
 url(r'album/add/$',views.AlbumCreate.as_view(),name='album-add'),
 
 url(r'^album/(?P<pk>[0-9]+)/$',views.AlbumUpdate.as_view(),name='album-update'),
-url(r'^album/(?P<pk>[0-9]+)/delete/$',views.AlbumDelete.as_view(),name='album-delete'),
+#url(r'^album/(?P<pk>[0-9]+)/delete/$',views.AlbumDelete.as_view(),name='album-delete'),
 url(r'^logout_user/$',views.logout_user,name='logout_user'),
 url(r'^post/new/$', views.transport_new, name='post_new'),
 url(r'^(?P<album_id>[0-9]+)/delete_album/$', views.delete_album, name='delete_album'),

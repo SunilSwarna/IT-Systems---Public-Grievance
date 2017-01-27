@@ -226,6 +226,7 @@ from .forms import TransportForm
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 
 class IndexView(generic.ListView):
 
@@ -267,10 +268,10 @@ class AlbumUpdate(UpdateView):
     model = Album
     fields = ['artist', 'album_title', 'genre', 'album_logo']
 
-class AlbumDelete(DeleteView):
-    model = Album
+'''class AlbumDelete(DeleteView):
+    model = Transport
     success_url = reverse_lazy('music:index')
-
+'''
 
 class UserFormView(View):
     form_class=UserForm
@@ -357,13 +358,15 @@ def alll(request):
     return render(request, 'music/alll.html', {'all_albums': all_albums,'k':k})
 
 def delete_album(request, album_id):
-    album = Transport.objects.get(pk=album_id)
+    album = Transport.objects.get(id=album_id)
+    print(album)
     album.delete()
     current_user = request.user
     # print current_user.id
     idp1 = current_user.id
     all_albums = Transport.objects.filter(idp=idp1)
-    return render(request, 'music/index.html', {'all_albums': all_albums})
+    return HttpResponseRedirect('/music/') 
+    #return render(request, 'music/index.html', {'all_albums': all_albums})
 
 def detail(request, album_id):
     if not request.user.is_authenticated():

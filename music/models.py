@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
     user = models.OneToOneField(User)
 
+    Adhar=models.CharField(max_length=14,default = '1234-5678-9012')
     def __unicode__(self):
         return self.username
 class Album(models.Model):
