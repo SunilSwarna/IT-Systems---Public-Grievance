@@ -7,6 +7,10 @@ class UserForm(forms.ModelForm):
 
         model= User
         fields=['username','email','password']
+         labels={'email':'Email-Id',
+                'username':'USERNAME',
+                }
+
 
 class UserLoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
