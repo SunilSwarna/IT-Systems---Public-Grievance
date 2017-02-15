@@ -12,39 +12,81 @@
     tools:context="com.example.bharath.publicg.MainPage"
     android:background="?android:attr/colorActivatedHighlight">
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_menu_preferences"
+        android:id="@+id/settingbut"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/cam_but" />
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:theme="?attr/actionBarTheme"
+        android:minHeight="?attr/actionBarSize"
+        android:id="@+id/toolbar"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/statusbut"
+        android:layout_alignBottom="@+id/toolbar"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
     <Button
         android:text="Emergency_Time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/emerBut"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="18dp" />
+        android:layout_alignBottom="@+id/toolbar"
+        android:layout_toLeftOf="@+id/statusbut"
+        android:layout_toStartOf="@+id/statusbut" />
 
     <Button
         android:text="Snap_It"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/cam_but"
-        android:onClick="launchCamera"
-        android:layout_alignBaseline="@+id/emerBut"
-        android:layout_alignBottom="@+id/emerBut"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="22dp"
-        android:layout_marginEnd="22dp" />
+        android:layout_alignBottom="@+id/toolbar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/emerBut"
+        android:layout_toStartOf="@+id/emerBut" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_menu_upload_you_tube"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/galarybut"
+        android:layout_alignStart="@+id/galarybut"
+        android:id="@+id/uploadBut" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@android:drawable/gallery_thumb"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/emerBut"
-        android:layout_toEndOf="@+id/emerBut"
-        android:layout_marginTop="50dp"
         android:id="@+id/image_viewID"
         android:minHeight="300dp"
-        android:minWidth="300dp" />
+        android:minWidth="300dp"
+        android:layout_above="@+id/uploadBut"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_menu_gallery"
+        android:id="@+id/galarybut"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
