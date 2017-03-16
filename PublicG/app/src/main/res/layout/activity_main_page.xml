@@ -10,27 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.bharath.publicg.MainPage"
-    android:background="?android:attr/colorActivatedHighlight">
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_menu_preferences"
-        android:id="@+id/settingbut"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/cam_but" />
-
-    <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:theme="?attr/actionBarTheme"
-        android:minHeight="?attr/actionBarSize"
-        android:id="@+id/toolbar"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    android:background="?android:attr/panelColorBackground">
 
     <Button
         android:text="Status"
@@ -58,17 +38,40 @@
         android:layout_alignBottom="@+id/toolbar"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/emerBut"
         android:layout_toStartOf="@+id/emerBut" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_menu_preferences"
+        android:id="@+id/settingbut"
+        android:layout_below="@+id/cam_but"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_menu_gallery"
+        android:id="@+id/galarybut"
+        android:background="@android:color/holo_green_light"
+        android:minHeight="47dp"
+        android:minWidth="47dp"
+        android:layout_below="@+id/statusbut"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:srcCompat="@android:drawable/ic_menu_upload_you_tube"
+        android:id="@+id/uploadBut"
+        android:minHeight="47dp"
+        android:minWidth="47dp"
+        android:background="@android:color/holo_green_light"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/galarybut"
-        android:layout_alignStart="@+id/galarybut"
-        android:id="@+id/uploadBut" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -77,16 +80,20 @@
         android:id="@+id/image_viewID"
         android:minHeight="300dp"
         android:minWidth="300dp"
-        android:layout_above="@+id/uploadBut"
+        android:layout_below="@+id/settingbut"
         android:layout_centerHorizontal="true" />
 
-    <ImageButton
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_menu_gallery"
-        android:id="@+id/galarybut"
-        android:layout_below="@+id/toolbar"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/TitleText"
+        android:background="@android:color/holo_green_light"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/image_viewID"
+        android:layout_alignStart="@+id/image_viewID"
+        android:layout_alignTop="@+id/uploadBut"
+        android:hint="TitleName" />
 
 </RelativeLayout>

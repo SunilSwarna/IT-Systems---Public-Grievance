@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -25,9 +26,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,26 +33,49 @@ import java.util.Map;
 public class MainPage extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    private static final String stringUrl = "https://public-grievence.000webhostapp.com/miracle.php";
+    //static final int REQUEST_CAPTURE = 1;
     ImageView image_view;
     ImageButton galaryBut;
     ImageButton uploadBut;
     private String encoded_string;
     Bitmap image;
+    Bitmap photo;
     private Uri imageSelect;
+    String Title;
+    public Button cam_but;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
-        Button cam_but = (Button) findViewById(R.id.cam_but);
+        cam_but = (Button) this.findViewById(R.id.cam_but);
+       /* GpsTool gpsTool = new GpsTool(this);
+        Location location = gpsTool.getLocation();
+        Double longitude = location.getLongitude();
+        Double latitude = location.getLatitude();
+        */
         galaryBut = (ImageButton) findViewById(R.id.galarybut);
+        final EditText TitleText = (EditText) findViewById(R.id.TitleText);
         image_view = (ImageView) findViewById(R.id.image_viewID);
         uploadBut = (ImageButton)findViewById(R.id.uploadBut);
 
         if (!hasCamera())
             cam_but.setEnabled(false);
-        galaryBut.setOnClickListener(new View.OnClickListener() {
+        cam_but.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if(intent.resolveActivity(getPackageManager())!= null) {
+                    startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                }
+                //File pic_Dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                // File imageFile = new File(pic_Dir, picName);
+
+                //intent.putExtra(MediaStore.EXTRA_OUTPUT, pictureUri);
+                //startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+            }
+        });
+        /*galaryBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -65,16 +86,27 @@ public class MainPage extends AppCompatActivity {
                 //intent.putExtra(MediaStore.EXTRA_OUTPUT, pictureUri);
                 startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
             }
-        });
+        });*/
         uploadBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 image = ((BitmapDrawable) image_view.getDrawable()).getBitmap();
+                Title = TitleText.getText().toString().trim();
                 new UploadImage().execute();
                 Toast.makeText(MainPage.this, "Image Uploaded",
                         Toast.LENGTH_LONG).show();
             }
         });
+       /* cam_but.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                Toast.makeText(MainPage.this, "Image Uploaded",
+                        Toast.LENGTH_LONG).show();
+            }
+        });*/
+
 
     }
 
@@ -99,17 +131,17 @@ public class MainPage extends AppCompatActivity {
                 break;
         }
     }*/
-    private String getPicName() {
+    /*private String getPicName() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
         String timeStamp = sdf.format(new Date());
         return "publicG" + timeStamp + ".jpg";
 
-    }
+    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null) {
+      //  super.onActivityResult(requestCode, resultCode, data);
+        /*if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null) {
             imageSelect = data.getData();
             InputStream inputStream;
            /* try {
@@ -125,9 +157,19 @@ public class MainPage extends AppCompatActivity {
             }catch (FileNotFoundException e) {
                 e.printStackTrace();
             }*/
-            image_view.setImageURI(imageSelect);
+        // image_view.setImageURI(imageSelect);
+    //}
+        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null){
+            System.out.println("00484828472/n");
+            Bundle extras = data.getExtras();
+            photo = (Bitmap) extras.get("data");
+
+            image_view.setImageBitmap(photo);
         }
     }
+
+
+
     private class UploadImage extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
@@ -147,7 +189,7 @@ public class MainPage extends AppCompatActivity {
     }
     private void makeRequest() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest request = new StringRequest(Request.Method.POST, "http://130.211.224.94/miracle.php",
+        StringRequest request = new StringRequest(Request.Method.POST, "https://ramuk369.pythonanywhere.com/companies/post/new/",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -162,11 +204,11 @@ public class MainPage extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String,String> map = new HashMap<>();
-                map.put("encoded_string",encoded_string);
+                map.put("data",encoded_string);
+                map.put("desc",Title);
                 return map;
             }
         };
         requestQueue.add(request);
     }
 }
-
